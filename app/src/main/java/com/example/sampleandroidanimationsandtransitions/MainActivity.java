@@ -1,17 +1,22 @@
 package com.example.sampleandroidanimationsandtransitions;
 
+import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvHello;
-    TextView tvTwo;
+    Button btnHorizontal;
+    Button btnVertical;
+    Button btnDiagonal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,44 +24,63 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvHello = findViewById(R.id.text_main_hello);
-        tvTwo = findViewById(R.id.text_main_text2);
+        btnHorizontal = findViewById(R.id.button_main_horizontal);
+        btnVertical = findViewById(R.id.button_main_vertical);
+        btnDiagonal = findViewById(R.id.button_main_diagonal);
 
-        tvHello.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateTheText();
-            }
-        });
-
-        tvTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateUsingObjectAnimator();
-            }
-        });
-
+        btnHorizontal.setOnClickListener(this);
+        btnVertical.setOnClickListener(this);
+        btnDiagonal.setOnClickListener(this);
 
     }
 
-    private void animateTheText() {
-        ValueAnimator animator = ValueAnimator.ofInt(0, getScreenWith() - tvHello.getWidth());
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+            case R.id.button_main_horizontal:
+                animateHorizontally(tvHello);
+                break;
+            case R.id.button_main_vertical:
+                animateVertically(tvHello);
+                break;
+            case R.id.button_main_diagonal:
+
+                break;
+
+        }
+    }
+
+    private void animateHorizontally(final View v) {
+        ValueAnimator animator = ValueAnimator.ofInt(0,
+                getScreenWith() - getAbsoluteX(v) - v.getWidth());
         animator.setDuration(1000);
         animator.start();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
                 int animatedValue = (int) valueAnimator.getAnimatedValue();
-                tvHello.setTranslationX(animatedValue);
+                v.setTranslationX(animatedValue);
             }
         });
     }
 
-    private void animateUsingObjectAnimator() {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(tvTwo, "translationY",
-                getScreenHeight() - getAbsoluteY(tvTwo) - tvTwo.getHeight());
+    private void animateVertically(View v) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(v, "translationY",
+                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
         animator.setDuration(1000);
         animator.start();
+    }
+
+    private void animateUsingAnimatorSet(Object target) {
+        Keyframe kf0 = Keyframe.ofFloat(0f, 0f);
+        Keyframe kf1 = Keyframe.ofFloat(.5f, .36f);
+        Keyframe kf2 = Keyframe.ofFloat(1f, 0f);
+        PropertyValuesHolder valuesHolder = PropertyValuesHolder.ofKeyframe("rotation",
+                kf0, kf1, kf2);
+        ObjectAnimator rotationAnim = ObjectAnimator.ofPropertyValuesHolder(target, valuesHolder);
+        rotationAnim.setDuration(5000);
     }
 
     private int getScreenWith() {
@@ -82,5 +106,4 @@ public class MainActivity extends AppCompatActivity {
         v.getLocationOnScreen(location);
         return location[1];
     }
-
 }

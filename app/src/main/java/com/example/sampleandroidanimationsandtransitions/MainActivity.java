@@ -1,5 +1,6 @@
 package com.example.sampleandroidanimationsandtransitions;
 
+import android.animation.AnimatorSet;
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnHorizontal;
     Button btnVertical;
     Button btnDiagonal;
+    Button btnReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnHorizontal = findViewById(R.id.button_main_horizontal);
         btnVertical = findViewById(R.id.button_main_vertical);
         btnDiagonal = findViewById(R.id.button_main_diagonal);
+        btnReset = findViewById(R.id.button_main_reset);
 
         btnHorizontal.setOnClickListener(this);
         btnVertical.setOnClickListener(this);
         btnDiagonal.setOnClickListener(this);
+        btnReset.setOnClickListener(this);
 
     }
 
@@ -38,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
+            case R.id.button_main_reset:
+                resetTheView(tvHello);
+                break;
             case R.id.button_main_horizontal:
                 animateHorizontally(tvHello);
                 break;
@@ -45,10 +52,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 animateVertically(tvHello);
                 break;
             case R.id.button_main_diagonal:
-
+                animateDiagonally(tvHello);
                 break;
 
         }
+    }
+
+    private void resetTheView(View view) {
+        view.setTranslationX(btnReset.getTranslationX());
+        view.setTranslationY(btnReset.getTranslationY());
     }
 
     private void animateHorizontally(final View v) {
@@ -71,6 +83,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getScreenHeight() - getAbsoluteY(v) - v.getHeight());
         animator.setDuration(1000);
         animator.start();
+    }
+
+    private void animateDiagonally(View v) {
+        ObjectAnimator animX = ObjectAnimator.ofFloat(v, "x", getScreenHeight());
+        ObjectAnimator animY = ObjectAnimator.ofFloat(v, "y", getScreenWith());
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animX, animY);
+        animatorSet.setDuration(2000);
+        animatorSet.start();
     }
 
     private void animateUsingAnimatorSet(Object target) {

@@ -12,28 +12,46 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/button_main_bounce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bounce" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
             android:id="@+id/button_main_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Reset" />
 
         <Button
             android:id="@+id/button_main_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Horizontal" />
 
         <Button
             android:id="@+id/button_main_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Vertical" />
 
         <Button
             android:id="@+id/button_main_diagonal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Diagonal" />
+
     </LinearLayout>
 
     <android.support.v7.widget.CardView

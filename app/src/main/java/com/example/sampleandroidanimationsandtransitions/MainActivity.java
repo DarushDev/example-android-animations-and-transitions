@@ -1,5 +1,6 @@
 package com.example.sampleandroidanimationsandtransitions;
 
+import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnVertical;
     Button btnDiagonal;
     Button btnReset;
+    Button btnBounce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnVertical = findViewById(R.id.button_main_vertical);
         btnDiagonal = findViewById(R.id.button_main_diagonal);
         btnReset = findViewById(R.id.button_main_reset);
+        btnBounce = findViewById(R.id.button_main_bounce);
 
         btnHorizontal.setOnClickListener(this);
         btnVertical.setOnClickListener(this);
         btnDiagonal.setOnClickListener(this);
         btnReset.setOnClickListener(this);
+        btnBounce.setOnClickListener(this);
 
     }
 
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //animateDiagonally1(cardBall);
                 //animateDiagonally2(cardBall);
                 animateDiagonally3(cardBall);
+                break;
+            case R.id.button_main_bounce:
+                bounce(cardBall);
                 break;
 
         }
@@ -110,6 +117,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         v.animate().setDuration(1000)
                 .translationX(getScreenWidth() - getAbsoluteX(v) - v.getWidth())
                 .translationY(getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+    }
+
+    // Declare property animation in XML and use ValueAnimator tag <animator>
+    private void bounce(final View v) {
+        ValueAnimator xmlAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(this,
+                R.animator.animator_bounce);
+        xmlAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float animatedValue = (float) valueAnimator.getAnimatedValue();
+                v.setTranslationY(animatedValue);
+            }
+        });
+        xmlAnimator.start();
     }
 
     private void animateUsingAnimatorSet(Object target) {

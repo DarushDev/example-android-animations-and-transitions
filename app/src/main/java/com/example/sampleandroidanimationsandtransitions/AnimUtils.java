@@ -17,6 +17,7 @@ import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getS
 
 public class AnimUtils {
 
+    // Using ValueAnimator
     public static void animateHorizontally(Activity context, final View v) {
         ValueAnimator animator = ValueAnimator.ofInt(0,
                 getScreenWidth(context) - getAbsoluteX(v) - v.getWidth());
@@ -32,6 +33,7 @@ public class AnimUtils {
         });
     }
 
+    // Using ObjectAnimator
     public static void animateVertically(Activity context, View v) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(v, "translationY",
                 getScreenHeight(context) - getAbsoluteY(v) - v.getHeight());
@@ -39,6 +41,7 @@ public class AnimUtils {
         animator.start();
     }
 
+    //Using AnimatorSet
     public static void animateDiagonally1(Activity context, View v) {
         ObjectAnimator animX = ObjectAnimator.ofFloat(v, "translationX",
                 getScreenWidth(context) - getAbsoluteX(v) - v.getWidth());
@@ -50,6 +53,7 @@ public class AnimUtils {
         animatorSet.start();
     }
 
+    //Using PropertyValuesHolder class to hold different properties for a single ObjectAnimator
     public static void animateDiagonally2(Activity context, View v) {
         PropertyValuesHolder vHolderX = PropertyValuesHolder.ofFloat("translationX",
                 getScreenWidth(context) - getAbsoluteX(v) - v.getWidth());
@@ -58,13 +62,14 @@ public class AnimUtils {
         ObjectAnimator.ofPropertyValuesHolder(v, vHolderX, vHolderY).setDuration(1000).start();
     }
 
+    //Using ViewPropertyAnimator
     public static void animateDiagonally3(Activity context, View v) {
         v.animate().setDuration(1000)
                 .translationX(getScreenWidth(context) - getAbsoluteX(v) - v.getWidth())
                 .translationY(getScreenHeight(context) - getAbsoluteY(v) - v.getHeight());
     }
 
-    // Declare property animation in XML and use ValueAnimator tag <animator>
+    // Using ValueAnimator from XML resoure with tag <animator>
     public static void bounce(Context context, final View v) {
         ValueAnimator xmlAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(context,
                 R.animator.animator_bounce);
@@ -78,6 +83,7 @@ public class AnimUtils {
         xmlAnimator.start();
     }
 
+    //Using AnimatorSet from XML resource with tag <set>
     public static void blink(Context context, View v) {
         AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(context,
                 R.animator.animator_blink);
@@ -85,6 +91,7 @@ public class AnimUtils {
         set.start();
     }
 
+    //Using Keyframe for holding different time intervals that the animation changes
     public static void animateUsingAnimatorSet(Object target) {
         Keyframe kf0 = Keyframe.ofFloat(0f, 0f);
         Keyframe kf1 = Keyframe.ofFloat(.5f, .36f);

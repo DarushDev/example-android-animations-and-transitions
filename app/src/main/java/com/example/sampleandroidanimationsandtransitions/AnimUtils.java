@@ -8,7 +8,9 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
+import android.widget.ImageView;
 
 import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteX;
 import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteY;
@@ -102,4 +104,13 @@ public class AnimUtils {
         rotationAnim.setDuration(5000);
     }
 
+    //Using AnimationDrawable
+    public static void playDrawableAnimation(ImageView image) {
+        AnimationDrawable animation = (AnimationDrawable) image.getBackground();
+        if (animation.isRunning()) {
+            animation.stop();
+        } else {
+            animation.start();
+        }
+    }
 }

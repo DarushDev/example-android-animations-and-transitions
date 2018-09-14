@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnReset;
     Button btnBounce;
     Button btnBlink;
+    ImageView ivHeart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnReset = findViewById(R.id.button_main_reset);
         btnBounce = findViewById(R.id.button_main_bounce);
         btnBlink = findViewById(R.id.button_main_blink);
+        ivHeart = findViewById(R.id.image_main_heart);
 
         btnHorizontal.setOnClickListener(this);
         btnVertical.setOnClickListener(this);
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnReset.setOnClickListener(this);
         btnBounce.setOnClickListener(this);
         btnBlink.setOnClickListener(this);
+        ivHeart.setOnClickListener(this);
 
     }
 
@@ -62,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_main_blink:
                 AnimUtils.blink(this, cardBall);
                 break;
+            case R.id.image_main_heart:
+                AnimUtils.playDrawableAnimation(ivHeart);
+                break;
 
         }
     }
@@ -70,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view.setTranslationX(btnReset.getTranslationX());
         view.setTranslationY(btnReset.getTranslationY());
     }
-
 
 
 }

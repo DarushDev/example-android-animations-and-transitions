@@ -7,6 +7,7 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tvHello;
+    CardView cardBall;
     Button btnHorizontal;
     Button btnVertical;
     Button btnDiagonal;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvHello = findViewById(R.id.text_main_hello);
+        cardBall = findViewById(R.id.card_main_ball);
         btnHorizontal = findViewById(R.id.button_main_horizontal);
         btnVertical = findViewById(R.id.button_main_vertical);
         btnDiagonal = findViewById(R.id.button_main_diagonal);
@@ -43,16 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id) {
             case R.id.button_main_reset:
-                resetTheView(tvHello);
+                resetTheView(cardBall);
                 break;
             case R.id.button_main_horizontal:
-                animateHorizontally(tvHello);
+                animateHorizontally(cardBall);
                 break;
             case R.id.button_main_vertical:
-                animateVertically(tvHello);
+                animateVertically(cardBall);
                 break;
             case R.id.button_main_diagonal:
-                animateDiagonally(tvHello);
+                animateDiagonally(cardBall);
                 break;
 
         }
@@ -86,11 +87,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void animateDiagonally(View v) {
-        ObjectAnimator animX = ObjectAnimator.ofFloat(v, "x", getScreenHeight());
-        ObjectAnimator animY = ObjectAnimator.ofFloat(v, "y", getScreenWith());
+        ObjectAnimator animX = ObjectAnimator.ofFloat(v, "translationX",
+                getScreenWith() - getAbsoluteX(v) - v.getWidth());
+        ObjectAnimator animY = ObjectAnimator.ofFloat(v, "translationY",
+                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animX, animY);
-        animatorSet.setDuration(2000);
+        animatorSet.setDuration(1000);
         animatorSet.start();
     }
 

@@ -9,9 +9,13 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+
+import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteX;
+import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteY;
+import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getScreenHeight;
+import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getScreenWidth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void animateHorizontally(final View v) {
         ValueAnimator animator = ValueAnimator.ofInt(0,
-                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
+                getScreenWidth(this) - getAbsoluteX(v) - v.getWidth());
         animator.setDuration(1000);
         animator.start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -95,16 +99,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void animateVertically(View v) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(v, "translationY",
-                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+                getScreenHeight(this) - getAbsoluteY(v) - v.getHeight());
         animator.setDuration(1000);
         animator.start();
     }
 
     private void animateDiagonally1(View v) {
         ObjectAnimator animX = ObjectAnimator.ofFloat(v, "translationX",
-                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
+                getScreenWidth(this) - getAbsoluteX(v) - v.getWidth());
         ObjectAnimator animY = ObjectAnimator.ofFloat(v, "translationY",
-                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+                getScreenHeight(this) - getAbsoluteY(v) - v.getHeight());
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animX, animY);
         animatorSet.setDuration(1000);
@@ -113,16 +117,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void animateDiagonally2(View v) {
         PropertyValuesHolder vHolderX = PropertyValuesHolder.ofFloat("translationX",
-                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
+                getScreenWidth(this) - getAbsoluteX(v) - v.getWidth());
         PropertyValuesHolder vHolderY = PropertyValuesHolder.ofFloat("translationY",
-                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+                getScreenHeight(this) - getAbsoluteY(v) - v.getHeight());
         ObjectAnimator.ofPropertyValuesHolder(v, vHolderX, vHolderY).setDuration(1000).start();
     }
 
     private void animateDiagonally3(View v) {
         v.animate().setDuration(1000)
-                .translationX(getScreenWidth() - getAbsoluteX(v) - v.getWidth())
-                .translationY(getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+                .translationX(getScreenWidth(this) - getAbsoluteX(v) - v.getWidth())
+                .translationY(getScreenHeight(this) - getAbsoluteY(v) - v.getHeight());
     }
 
     // Declare property animation in XML and use ValueAnimator tag <animator>
@@ -156,27 +160,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rotationAnim.setDuration(5000);
     }
 
-    private int getScreenWidth() {
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        return metrics.widthPixels;
-    }
-
-    private int getScreenHeight() {
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        return metrics.heightPixels;
-    }
-
-    private int getAbsoluteX(View v) {
-        int[] location = new int[2];
-        v.getLocationOnScreen(location);
-        return location[0];
-    }
-
-    private int getAbsoluteY(View v) {
-        int[] location = new int[2];
-        v.getLocationOnScreen(location);
-        return location[1];
-    }
 }

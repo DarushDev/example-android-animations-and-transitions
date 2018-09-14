@@ -11,7 +11,6 @@ import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 animateVertically(cardBall);
                 break;
             case R.id.button_main_diagonal:
-                animateDiagonally(cardBall);
+                //animateDiagonally1(cardBall);
+                //animateDiagonally2(cardBall);
+                animateDiagonally3(cardBall);
                 break;
 
         }
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void animateHorizontally(final View v) {
         ValueAnimator animator = ValueAnimator.ofInt(0,
-                getScreenWith() - getAbsoluteX(v) - v.getWidth());
+                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
         animator.setDuration(1000);
         animator.start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -86,15 +87,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animator.start();
     }
 
-    private void animateDiagonally(View v) {
+    private void animateDiagonally1(View v) {
         ObjectAnimator animX = ObjectAnimator.ofFloat(v, "translationX",
-                getScreenWith() - getAbsoluteX(v) - v.getWidth());
+                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
         ObjectAnimator animY = ObjectAnimator.ofFloat(v, "translationY",
                 getScreenHeight() - getAbsoluteY(v) - v.getHeight());
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animX, animY);
         animatorSet.setDuration(1000);
         animatorSet.start();
+    }
+
+    private void animateDiagonally2(View v) {
+        PropertyValuesHolder vHolderX = PropertyValuesHolder.ofFloat("translationX",
+                getScreenWidth() - getAbsoluteX(v) - v.getWidth());
+        PropertyValuesHolder vHolderY = PropertyValuesHolder.ofFloat("translationY",
+                getScreenHeight() - getAbsoluteY(v) - v.getHeight());
+        ObjectAnimator.ofPropertyValuesHolder(v, vHolderX, vHolderY).setDuration(1000).start();
+    }
+
+    private void animateDiagonally3(View v) {
+        v.animate().setDuration(1000)
+                .translationX(getScreenWidth() - getAbsoluteX(v) - v.getWidth())
+                .translationY(getScreenHeight() - getAbsoluteY(v) - v.getHeight());
     }
 
     private void animateUsingAnimatorSet(Object target) {
@@ -107,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rotationAnim.setDuration(5000);
     }
 
-    private int getScreenWith() {
+    private int getScreenWidth() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         return metrics.widthPixels;

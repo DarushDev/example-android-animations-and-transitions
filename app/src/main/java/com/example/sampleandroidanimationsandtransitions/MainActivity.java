@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnDiagonal;
     Button btnReset;
     Button btnBounce;
+    Button btnBlink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDiagonal = findViewById(R.id.button_main_diagonal);
         btnReset = findViewById(R.id.button_main_reset);
         btnBounce = findViewById(R.id.button_main_bounce);
+        btnBlink = findViewById(R.id.button_main_blink);
 
         btnHorizontal.setOnClickListener(this);
         btnVertical.setOnClickListener(this);
         btnDiagonal.setOnClickListener(this);
         btnReset.setOnClickListener(this);
         btnBounce.setOnClickListener(this);
+        btnBlink.setOnClickListener(this);
 
     }
 
@@ -62,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_main_bounce:
                 bounce(cardBall);
+                break;
+            case R.id.button_main_blink:
+                blink(cardBall);
                 break;
 
         }
@@ -131,6 +137,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         xmlAnimator.start();
+    }
+
+    private void blink(View v) {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+                R.animator.animator_blink);
+        set.setTarget(v);
+        set.start();
     }
 
     private void animateUsingAnimatorSet(Object target) {

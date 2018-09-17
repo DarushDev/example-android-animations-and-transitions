@@ -1,6 +1,8 @@
 package com.example.sampleandroidanimationsandtransitions;
 
+import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
@@ -9,7 +11,9 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
 
 import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteX;
@@ -111,6 +115,69 @@ public class AnimUtils {
             animation.stop();
         } else {
             animation.start();
+        }
+    }
+
+    public static void crossfade(View fadeInView, final View fadeOutView, int duration) {
+
+        fadeInView.setAlpha(0f);
+        fadeInView.setVisibility(View.VISIBLE);
+        fadeInView.animate()
+                .alpha(1f)
+                .setDuration(duration)
+                .setListener(null);
+
+        fadeOutView.animate()
+                .alpha(0f)
+                .setDuration(duration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        fadeOutView.setVisibility(View.GONE);
+                    }
+                });
+    }
+
+    //Using ViewAnimationUtils.createCircularReveal() method
+    public static void circularReveal(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // get the center for the clipping circle
+            int cx = view.getWidth() / 2;
+            int cy = view.getHeight() / 2;
+
+            //get the final radius for the clipping circle
+            float finalRadius = (float) Math.hypot(cx, cy);
+
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+
+            view.setVisibility(View.VISIBLE);
+            animator.start();
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //Using ViewAnimationUtils.createCircularReveal() method
+    public static void circularHide(final View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int cx = view.getWidth() / 2;
+            int cy = view.getHeight() / 2;
+
+            float initialRadius = (float) Math.hypot(cx, cy);
+
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
+
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+
+            animator.start();
+        } else {
+            view.setVisibility(View.VISIBLE);
         }
     }
 }

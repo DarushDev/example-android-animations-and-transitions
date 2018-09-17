@@ -7,4 +7,18 @@
     android:orientation="vertical"
     tools:context=".DrawableGraphicsActivity">
 
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button_main_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rotate" />
+
+    <ImageView
+        android:id="@+id/image_main_arrow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/animated_vector_arrow"
+        android:visibility="visible" />
+
 </LinearLayout>

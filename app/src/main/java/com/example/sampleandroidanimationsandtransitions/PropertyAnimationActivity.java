@@ -19,9 +19,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
     Button btnReset;
     Button btnBounce;
     Button btnBlink;
-    Button btnRotate;
     ImageView ivHeart;
-    ImageView ivArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +33,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnReset = findViewById(R.id.button_main_reset);
         btnBounce = findViewById(R.id.button_main_bounce);
         btnBlink = findViewById(R.id.button_main_blink);
-        btnRotate = findViewById(R.id.button_main_rotate);
         ivHeart = findViewById(R.id.image_main_heart);
-        ivArrow = findViewById(R.id.image_main_arrow);
 
         btnHorizontal.setOnClickListener(this);
         btnVertical.setOnClickListener(this);
@@ -45,9 +41,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnReset.setOnClickListener(this);
         btnBounce.setOnClickListener(this);
         btnBlink.setOnClickListener(this);
-        btnRotate.setOnClickListener(this);
         ivHeart.setOnClickListener(this);
-        ivArrow.setOnClickListener(this);
 
     }
 
@@ -78,36 +72,13 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
             case R.id.image_main_heart:
                 AnimUtils.playDrawableAnimation(ivHeart);
                 break;
-            case R.id.button_main_rotate:
-                ivArrow.setVisibility(View.VISIBLE);
-                rotate(ivArrow);
-                hideArrowImage();
-                break;
 
         }
-    }
-
-    private void rotate(ImageView image) {
-
-        Drawable drawable = image.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }
-
     }
 
     private void resetTheView(View view) {
         view.setTranslationX(btnReset.getTranslationX());
         view.setTranslationY(btnReset.getTranslationY());
-    }
-
-    private void hideArrowImage() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ivArrow.setVisibility(View.GONE);
-            }
-        }, 5000);
     }
 
 }

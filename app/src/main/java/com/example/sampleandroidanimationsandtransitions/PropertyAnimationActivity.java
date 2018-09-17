@@ -17,6 +17,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
     Button btnBounce;
     Button btnBlink;
     Button btnFollowPath;
+    Button btnFling;
     ImageView ivHeart;
 
     @Override
@@ -32,6 +33,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnBounce = findViewById(R.id.button_main_bounce);
         btnBlink = findViewById(R.id.button_main_blink);
         btnFollowPath = findViewById(R.id.button_main_followpath);
+        btnFling = findViewById(R.id.button_main_fling);
         ivHeart = findViewById(R.id.image_main_heart);
 
         btnHorizontal.setOnClickListener(this);
@@ -41,6 +43,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnBounce.setOnClickListener(this);
         btnBlink.setOnClickListener(this);
         btnFollowPath.setOnClickListener(this);
+        btnFling.setOnClickListener(this);
         ivHeart.setOnClickListener(this);
 
     }
@@ -74,6 +77,9 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
                 break;
             case R.id.button_main_followpath:
                 AnimUtils.followPath(cardBall);
+                break;
+            case R.id.button_main_fling:
+                AnimUtils.flingAnimation(cardBall);
                 break;
 
         }

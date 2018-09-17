@@ -13,6 +13,8 @@ import android.content.Context;
 import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.support.animation.DynamicAnimation;
+import android.support.animation.FlingAnimation;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.PathInterpolator;
@@ -207,5 +209,15 @@ public class AnimUtils {
             animator.setInterpolator(pathInterpolator);
             animator.start();
         }
+    }
+
+    //Using FlingAnimation
+    public static void flingAnimation(View view) {
+        FlingAnimation fling = new FlingAnimation(view, DynamicAnimation.TRANSLATION_X);
+        fling.setStartVelocity(2000)
+                .setMinValue(-200)
+                .setMaxValue(2000)
+                .setFriction(0.9f)
+                .start();
     }
 }

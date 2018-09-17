@@ -32,6 +32,13 @@
             android:layout_weight="1"
             android:text="Follow Path" />
 
+        <Button
+            android:id="@+id/button_main_fling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fling" />
+
     </LinearLayout>
 
     <LinearLayout

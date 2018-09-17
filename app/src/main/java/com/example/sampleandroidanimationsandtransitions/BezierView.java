@@ -35,6 +35,7 @@ public class BezierView extends View {
         path = new Path();
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
+        paint.setAntiAlias(true);
     }
 
     @Override

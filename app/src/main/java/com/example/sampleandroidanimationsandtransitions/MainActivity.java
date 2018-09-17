@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, PropertyAnimationActivity.class));
                 break;
             case R.id.button_main_drawablegraphics:
-
+                startActivity(new Intent(MainActivity.this, DrawableGraphicsActivity.class));
                 break;
             case R.id.button_main_revealorhide:
 

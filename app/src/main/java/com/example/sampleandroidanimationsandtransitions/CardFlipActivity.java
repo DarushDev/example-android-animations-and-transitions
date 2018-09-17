@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 public class CardFlipActivity extends AppCompatActivity {
 
+    private boolean mIsShowingBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,34 @@ public class CardFlipActivity extends AppCompatActivity {
                     .add(R.id.frame_cardflip_container, new CardFrontFragment())
                     .commit();
         }
+
+        findViewById(R.id.frame_cardflip_container).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flipCard();
+            }
+        });
+    }
+
+    private void flipCard() {
+        if (mIsShowingBack) {
+            getSupportFragmentManager().popBackStack();
+            mIsShowingBack = false;
+            return;
+        }
+
+        mIsShowingBack = true;
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(
+                        R.animator.animator_card_flip_right_in,
+                        R.animator.animator_card_flip_right_out,
+                        R.animator.animator_card_flip_left_in,
+                        R.animator.animator_card_flip_left_out)
+                .replace(R.id.frame_cardflip_container, new CardBackFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     public static class CardFrontFragment extends Fragment {

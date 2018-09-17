@@ -13,7 +13,7 @@
         android:textColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is the title" />
+        android:text="Click on me!" />
 
     <TextView style="?android:textAppearanceSmall"
         android:textAllCaps="true"

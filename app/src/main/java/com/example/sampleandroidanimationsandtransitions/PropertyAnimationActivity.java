@@ -1,6 +1,7 @@
 package com.example.sampleandroidanimationsandtransitions;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -18,6 +19,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
     Button btnBlink;
     Button btnFollowPath;
     Button btnFling;
+    Button btnAutoAnimate;
     ImageView ivHeart;
 
     @Override
@@ -34,6 +36,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnBlink = findViewById(R.id.button_main_blink);
         btnFollowPath = findViewById(R.id.button_main_followpath);
         btnFling = findViewById(R.id.button_main_fling);
+        btnAutoAnimate = findViewById(R.id.button_main_auto);
         ivHeart = findViewById(R.id.image_main_heart);
 
         btnHorizontal.setOnClickListener(this);
@@ -44,6 +47,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnBlink.setOnClickListener(this);
         btnFollowPath.setOnClickListener(this);
         btnFling.setOnClickListener(this);
+        btnAutoAnimate.setOnClickListener(this);
         ivHeart.setOnClickListener(this);
 
     }
@@ -81,8 +85,26 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
             case R.id.button_main_fling:
                 AnimUtils.flingAnimation(cardBall);
                 break;
+            case R.id.button_main_auto:
+                hideAndShowTheBall();
+                break;
 
         }
+    }
+
+    /**
+     * Since we have added the line, android:animateLayoutChanges="true", to the main layout, the
+     * layout changes will be animated automatically
+     */
+    private void hideAndShowTheBall() {
+        cardBall.setVisibility(View.GONE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                cardBall.setVisibility(View.VISIBLE);
+            }
+        }, 2000);
+
     }
 
     private void resetTheView(View view) {

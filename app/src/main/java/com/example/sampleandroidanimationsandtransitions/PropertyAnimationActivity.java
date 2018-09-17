@@ -1,9 +1,6 @@
 package com.example.sampleandroidanimationsandtransitions;
 
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -19,6 +16,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
     Button btnReset;
     Button btnBounce;
     Button btnBlink;
+    Button btnFollowPath;
     ImageView ivHeart;
 
     @Override
@@ -33,6 +31,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnReset = findViewById(R.id.button_main_reset);
         btnBounce = findViewById(R.id.button_main_bounce);
         btnBlink = findViewById(R.id.button_main_blink);
+        btnFollowPath = findViewById(R.id.button_main_followpath);
         ivHeart = findViewById(R.id.image_main_heart);
 
         btnHorizontal.setOnClickListener(this);
@@ -41,6 +40,7 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnReset.setOnClickListener(this);
         btnBounce.setOnClickListener(this);
         btnBlink.setOnClickListener(this);
+        btnFollowPath.setOnClickListener(this);
         ivHeart.setOnClickListener(this);
 
     }
@@ -71,6 +71,9 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
                 break;
             case R.id.image_main_heart:
                 AnimUtils.playDrawableAnimation(ivHeart);
+                break;
+            case R.id.button_main_followpath:
+                AnimUtils.followPath(cardBall);
                 break;
 
         }

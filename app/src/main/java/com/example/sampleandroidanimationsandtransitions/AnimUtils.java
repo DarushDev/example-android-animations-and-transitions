@@ -10,10 +10,12 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.PathInterpolator;
 import android.widget.ImageView;
 
 import static com.example.sampleandroidanimationsandtransitions.ScreenUtils.getAbsoluteX;
@@ -178,6 +180,32 @@ public class AnimUtils {
             animator.start();
         } else {
             view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static void followPath(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Path path = new Path();
+            path.arcTo(100f, 300f, 1000f, 1000f, 270f, -180f, true);
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+            animator.setDuration(2000);
+            animator.start();
+        } else {
+            // Crate animator without using curved path
+        }
+    }
+
+    //TODO: Needs to be checked. Gives error.
+    public static void interpolatePath(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Path path = new Path();
+            path.arcTo(0f, 0f, 1000f, 1000f, 270f, -180f, true);
+            PathInterpolator pathInterpolator = new PathInterpolator(path);
+
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationX", 100f);
+            animator.setInterpolator(pathInterpolator);
+            animator.start();
         }
     }
 }

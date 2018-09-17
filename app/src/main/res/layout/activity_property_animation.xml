@@ -25,6 +25,13 @@
             android:layout_weight="1"
             android:text="Blink" />
 
+        <Button
+            android:id="@+id/button_main_followpath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Follow Path" />
+
     </LinearLayout>
 
     <LinearLayout

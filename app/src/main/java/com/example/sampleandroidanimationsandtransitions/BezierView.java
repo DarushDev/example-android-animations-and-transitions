@@ -49,8 +49,8 @@ public class BezierView extends View {
         int height = getHeight();
 
         int x1 = 0;
-        int y1 = 0;
-        int x2 = 0;
+        int y1 = height / 2;
+        int x2 = width / 2;
         int y2 = 0;
         int x3 = width;
         int y3 = strokeWidth + 5;
@@ -71,13 +71,13 @@ public class BezierView extends View {
         // Draw a straight lined shape
         paint.setColor(0xFFE55B8D);
         path.moveTo(width, 0);
-        path.lineTo(width/2, height/2);
+        path.lineTo(width / 2, height / 2);
         path.lineTo(width, height);
 
         canvas.drawPath(path, paint);
 
         // Draw a rectangle around the canvas to indicate its borders
-        Rect rect = new Rect(0,0, width, height);
+        Rect rect = new Rect(0, 0, width, height);
         paint.setColor(Color.WHITE);
         paint.setPathEffect(new PathEffect());
         canvas.drawRect(rect, paint);

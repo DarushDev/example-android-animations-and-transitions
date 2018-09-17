@@ -15,6 +15,13 @@ public class CardFlipActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_flip);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.frame_cardflip_container, new CardFrontFragment())
+                    .commit();
+        }
     }
 
     public static class CardFrontFragment extends Fragment {

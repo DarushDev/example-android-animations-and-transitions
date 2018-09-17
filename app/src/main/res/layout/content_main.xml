@@ -26,5 +26,10 @@
         android:id="@+id/button_main_revealorhide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:text="Card Flip Animation"
+        android:id="@+id/button_main_cardflip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

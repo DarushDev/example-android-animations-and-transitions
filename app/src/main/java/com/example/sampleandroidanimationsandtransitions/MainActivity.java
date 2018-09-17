@@ -7,11 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    Button btnPropertyAnimationOverview;
-    Button btnDrawableGraphics;
-    Button btnRevealOrHide;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,29 +16,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        btnPropertyAnimationOverview = findViewById(R.id.button_main_propertyanimation);
-        btnDrawableGraphics = findViewById(R.id.button_main_drawablegraphics);
-        btnRevealOrHide = findViewById(R.id.button_main_revealorhide);
-
-        btnPropertyAnimationOverview.setOnClickListener(this);
-        btnDrawableGraphics.setOnClickListener(this);
-        btnRevealOrHide.setOnClickListener(this);
-
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_main_propertyanimation:
+        findViewById(R.id.button_main_propertyanimation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, PropertyAnimationActivity.class));
-                break;
-            case R.id.button_main_drawablegraphics:
+            }
+        });
+
+        findViewById(R.id.button_main_drawablegraphics).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, DrawableGraphicsActivity.class));
-                break;
-            case R.id.button_main_revealorhide:
+            }
+        });
+
+        findViewById(R.id.button_main_revealorhide).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, RevealOrHideActivity.class));
-                break;
-        }
+            }
+        });
+
+        findViewById(R.id.button_main_cardflip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CardFlipActivity.class));
+            }
+        });
+
     }
+
 }

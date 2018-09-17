@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, DrawableGraphicsActivity.class));
                 break;
             case R.id.button_main_revealorhide:
-
+                startActivity(new Intent(MainActivity.this, RevealOrHideActivity.class));
                 break;
         }
     }

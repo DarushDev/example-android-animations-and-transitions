@@ -25,6 +25,13 @@
             android:layout_weight="1"
             android:text="Blink" />
 
+        <Button
+            android:id="@+id/button_main_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rotate" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -77,4 +84,10 @@
 
     </android.support.v7.widget.CardView>
 
+    <ImageView
+        android:id="@+id/image_main_arrow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/animated_vector_arrow"
+        android:visibility="gone" />
 </LinearLayout>

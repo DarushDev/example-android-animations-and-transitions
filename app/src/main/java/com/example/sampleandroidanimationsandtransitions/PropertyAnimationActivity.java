@@ -50,6 +50,8 @@ public class PropertyAnimationActivity extends AppCompatActivity implements View
         btnAutoAnimate.setOnClickListener(this);
         ivHeart.setOnClickListener(this);
 
+        AnimUtils.overrideAnimatorDurationScale(this);
+
     }
 
     @Override

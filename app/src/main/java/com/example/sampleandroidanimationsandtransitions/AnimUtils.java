@@ -13,8 +13,10 @@ import android.content.Context;
 import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.animation.DynamicAnimation;
 import android.support.animation.FlingAnimation;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.PathInterpolator;
@@ -219,5 +221,26 @@ public class AnimUtils {
                 .setMaxValue(2000)
                 .setFriction(0.9f)
                 .start();
+    }
+
+    /**
+     * This method overrides the animator duration scale in developer settings.
+     * @param context
+     */
+    public static void overrideAnimatorDurationScale(Context context) {
+        float durationScale = Settings.Global.getFloat(context.getContentResolver(),
+                Settings.Global.ANIMATOR_DURATION_SCALE, 0);
+        Log.d("mytag", "overrideAnimatorDurationScale: " + durationScale);
+
+        if (durationScale != 1) {
+            try {
+                ValueAnimator.class.getMethod("setDurationScale", float.class).invoke(null, 1f);
+            } catch (Throwable t) {
+                Log.d("mytag", "Somthing bad happened", t);
+                // It means something bad happened, and animations are still
+                // altered by the global settings. You should warn the user and
+                // exit application.
+            }
+        }
     }
 }

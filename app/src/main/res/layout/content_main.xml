@@ -39,4 +39,10 @@
         android:layout_height="wrap_content"
         android:text="Draw Path" />
 
+    <Button
+        android:id="@+id/button_main_animatedpath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Animated Path" />
+
 </LinearLayout>

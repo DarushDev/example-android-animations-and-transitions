@@ -36,6 +36,7 @@ public class AnimatedPathView extends View {
         path = new Path();
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setAntiAlias(true);
     }
 
@@ -43,7 +44,7 @@ public class AnimatedPathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float intervals[] = new float[]{30, 15};
+        float intervals[] = new float[]{30, 25};
         int strokeWidth = 10;
 
         int width = getWidth();
